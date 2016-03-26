@@ -14303,7 +14303,7 @@ module.exports = {
         that.todos.$remove(todo);
         setTimeout(function () {
           that.status = '';
-        }, 2000);
+        }, 1000);
       });
     },
     postNew: function postNew() {
@@ -14317,6 +14317,10 @@ module.exports = {
         this.clickadd = !this.clickadd;
 
         that.todos.push(data);
+
+        that.issueTitle = '';
+
+        that.issueDescription = '';
       });
     },
 
@@ -14324,10 +14328,25 @@ module.exports = {
 
       if (priorty == 5) {
 
-        return '<span class="text-danger">Highest</span>';
+        return '<span class="text-success">Highest</span>';
+      }
+
+      if (priorty == 4) {
+
+        return '<span class="text-success">High</span>';
+      }
+
+      if (priorty == 3) {
+
+        return '<span class="text-warning">Normal</span>';
+      }
+
+      if (priorty == 2) {
+
+        return '<span class="text-danger">Low</span>';
       } else {
 
-        return '<span class="text-warning">Lowest</span>';
+        return '<span class="text-danger">Lowest</span>';
       }
     }
 
@@ -14347,7 +14366,7 @@ module.exports = {
 
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n  <div class=\"row\">\n    <div class=\"col-lg-12\">\n      <div class=\"panel panel-default\">\n          <table class=\"table table-bordered\" id=\"table\">\n            <thead>\n              <tr>\n                <th>Issue Name</th>\n                <th>Issue Type</th>\n                <th>Issue Description</th>\n                <th>Action</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr v-for=\"todo in todos\">\n                <td> {{ todo.title }} </td>\n                <td> {{ todo.description }} </td>\n                <td>{{{ prior(todo.priorty) }}}</td>\n                <td> <a class=\"text-danger\" @click=\"postDelete(todo)\"><span class=\"glyphicon glyphicon-trash\"></span> </a></td>\n              </tr>\n            </tbody>\n          </table>    \n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-lg-12\" style=\"min-height:40px\">\n      <div v-if=\"status!=''\" class=\"col-lg-2\"> \n        {{ status }} \n      </div>\n      <div v-if=\"status!=''\" class=\"spinner col-lg-2\">\n        <div class=\"rect1\"></div>\n        <div class=\"rect2\"></div>\n        <div class=\"rect3\"></div>\n        <div class=\"rect4\"></div>\n        <div class=\"rect5\"></div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\" id=\"form\">\n    <div class=\"col-lg-12\" v-show=\"clickadd\">\n      <div class=\"row\">\n        <form class=\"col-lg-6\">\n          <div class=\"form-group\">\n            <label for=\"exampleInputEmail1\">Issue Name</label>\n            <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" placeholder=\"Email\" v-model=\"issueTitle\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"exampleInputPassword1\">Issue Description</label>\n            <input type=\"text\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Password\" v-model=\"issueDescription\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"exampleInputPassword1\">Issue Priorty</label>\n            <input type=\"text\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Password\" v-model=\"issuePriorty\">\n          </div>          \n        </form>\n      </div>\n    </div>\n\n    <div class=\"col-lg-12\">\n      <button type=\"submit\" class=\"btn btn-success\" v-show=\"clickadd\" v-on:click=\"postNew()\">\n        Submit\n      </button>\n      <button class=\"btn btn-danger\" v-show=\"clickadd\" v-on:click=\"clickAdd()\">\n        Cancel\n      </button>      \n      <button class=\"btn btn-success\" v-on:click=\"clickAdd()\" v-show=\"!clickadd\">\n        <span class=\"glyphicon glyphicon-pencil\"></span>Add New\n      </button>\n    </div>\n  </div>\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n  <div class=\"row\">\n    <div class=\"col-lg-12\">\n      <div class=\"panel panel-default\">\n          <table class=\"table table-bordered\" id=\"table\">\n            <thead>\n              <tr>\n                <th>Issue Name</th>\n                <th>Issue Description</th>\n                <th>Issue Type</th>\n                <th>Action</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr v-for=\"todo in todos\">\n                <td> {{ todo.title }} </td>\n                <td> {{ todo.description }} </td>\n                <td>{{{ prior(todo.priorty) }}}</td>\n                <td> <a class=\"text-danger\" @click=\"postDelete(todo)\"><span class=\"glyphicon glyphicon-trash\"></span> </a></td>\n              </tr>\n            </tbody>\n          </table>    \n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-lg-12\" style=\"min-height:40px\">\n      <div v-if=\"status!=''\" class=\"col-lg-2\"> \n        {{ status }} \n      </div>\n      <div v-if=\"status!=''\" class=\"spinner col-lg-2\">\n        <div class=\"rect1\"></div>\n        <div class=\"rect2\"></div>\n        <div class=\"rect3\"></div>\n        <div class=\"rect4\"></div>\n        <div class=\"rect5\"></div>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\" id=\"form\">\n    <div class=\"col-lg-12\" v-show=\"clickadd\">\n      <div class=\"row\">\n        <form class=\"col-lg-6\">\n          <div class=\"form-group\">\n            <label for=\"exampleInputEmail1\">Issue Name</label>\n            <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" placeholder=\"Enter Name\" v-model=\"issueTitle\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"exampleInputPassword1\">Issue Description</label>\n            <input type=\"text\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Enter Description\" v-model=\"issueDescription\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"exampleInputPassword1\">Issue Priorty</label>\n            <select class=\"form-control\" v-model=\"issuePriorty\">\n                <option value=\"5\">Highest</option>\n                <option value=\"4\">High</option>\n                <option value=\"3\">Normal</option>\n                <option value=\"2\">Low</option>\n                <option value=\"1\">Lowest</option>\n\n            </select>\n          </div>          \n        </form>\n      </div>\n    </div>\n\n    <div class=\"col-lg-12\">\n      <button type=\"submit\" class=\"btn btn-success\" v-show=\"clickadd\" v-on:click=\"postNew()\">\n        Submit\n      </button>\n      <button class=\"btn btn-danger\" v-show=\"clickadd\" v-on:click=\"clickAdd()\">\n        Cancel\n      </button>      \n      <button class=\"btn btn-success\" v-on:click=\"clickAdd()\" v-show=\"!clickadd\">\n        <span class=\"glyphicon glyphicon-pencil\"></span>Add New\n      </button>\n    </div>\n  </div>\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

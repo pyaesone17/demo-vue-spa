@@ -24,8 +24,8 @@
             <thead>
               <tr>
                 <th>Issue Name</th>
-                <th>Issue Type</th>
                 <th>Issue Description</th>
+                <th>Issue Type</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -61,15 +61,22 @@
         <form class="col-lg-6">
           <div class="form-group">
             <label for="exampleInputEmail1">Issue Name</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email" v-model="issueTitle">
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Name" v-model="issueTitle">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Issue Description</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="issueDescription">
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Description" v-model="issueDescription">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Issue Priorty</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="issuePriorty">
+            <select class="form-control" v-model="issuePriorty">
+                <option value="5">Highest</option>
+                <option value="4">High</option>
+                <option value="3">Normal</option>
+                <option value="2">Low</option>
+                <option value="1">Lowest</option>
+
+            </select>
           </div>          
         </form>
       </div>
@@ -135,7 +142,7 @@
             that.todos.$remove(todo);
             setTimeout(function () {
               that.status='';
-            },2000);
+            },1000);
 
         }); 
 
@@ -154,6 +161,10 @@
             
             that.todos.push(data);
 
+            that.issueTitle='';
+
+            that.issueDescription='';
+
         }); 
 
       },
@@ -162,11 +173,27 @@
       
         if(priorty==5){
 
-          return '<span class="text-danger">Highest</span>';
+          return '<span class="text-success">Highest</span>';
         }
+       
+        if(priorty==4){
+
+          return '<span class="text-success">High</span>';
+        }
+        
+        if(priorty==3){
+
+          return '<span class="text-warning">Normal</span>';
+        }
+
+        if(priorty==2){
+
+          return '<span class="text-danger">Low</span>';
+        }
+
         else{
 
-          return '<span class="text-warning">Lowest</span>';
+          return '<span class="text-danger">Lowest</span>';
         }
             
       }
