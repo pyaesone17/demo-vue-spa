@@ -1,0 +1,11 @@
+{
+    "dev": {
+    "host": "localhost",
+    "user":  "root" ,
+    "password" : "2451994",
+    "database": "express",
+    "driver": "mysql",
+    "multipleStatements": true
+  }
+}
+

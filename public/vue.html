@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/custom.css">
+	<style type="text/css">
+		.v-link-active{
+			color: #a94442,
+			fuck you
+		}
+		.nav{
+			border-right: 1px solid #DDDDDD;
+			min-height: 500px;
+		}
+		/* The animation code */
+		@keyframes example {
+		    from {opacity: 0;}
+		    to {opacity: 1;}
+		}
+
+		/* The element to apply the animation to */
+		.ani {
+		    animation-name: example;
+		    animation-duration: 2s;
+		}
+	</style>
+</head>
+
+<body id="body" style="margin-top:100px">
+
+	<div class="container" id="app" >
+		<div class="row">
+			<div class="col-lg-2 nav">
+				<p class="pull-left">
+			    	<!-- use v-link directive for navigation. -->
+			    	<a v-link="{ path: '/foo' }">Go to Foo</a>
+			    	<br>
+			    	<a v-link="{ path: '/bar' }">Go to Bar</a>
+				</p>
+
+			</div>
+			<div class="col-lg-8 col-lg-offset-1">
+				<h3 >
+					Expressing your Vue {{ title }}
+				</h3>
+				<h2>
+					<span class="glyphicon glyphicon-heart text-danger"></span>
+				</h2>
+				<!-- route outlet -->
+				<router-view></router-view>				
+			</div>		
+		</div>
+
+	</div>
+
+	<script type="text/x-template" id="foo">
+			<h4 class="ani">Foorify template is</h4>
+			<h5>powered by <span class="text-danger">Express</span> Server and 
+			<span class="text-danger">Vue</span> Js</h5> 
+			<p>The data is {{ a }} and {{ b}} </p>
+			<p> {{ a*b }} </p>
+			<p>Current route path: {{$route.path}}</p>
+	</script>	
+
+	<script type="text/x-template" id="bar">
+			<h4 class="ani">Barify template is</h4>
+			<h5>powered by <span class="text-danger">Express</span> Server and 
+			<span class="text-danger">Vue</span> Js</h5> 
+			<p>The data is {{ a }} and {{ b}} </p>
+			<p> {{ a*b }} </p>
+			<p>Current route path: {{$route.path}}</p>
+	</script>
+
+	<script type="text/javascript" src="/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="/vue-router/dist/vue-router.js"></script>
+	<script type="text/javascript" src="/javascripts/vueroute.js"></script>
+</body>
+
+</html>

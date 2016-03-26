@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  h3&attributes({'v-on:click':'go()'}) hi Thz 
+  h4.text-success&attributes({'v-show':'showme'}) Now you see me ?
+  p Welcome to #{title}
+
+ 
